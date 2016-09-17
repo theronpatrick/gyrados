@@ -1,0 +1,28 @@
+body {
+  font-family: 'Raleway', sans-serif;
+  background-color: $dark-beige;
+  color: $white;
+  height: 100%;
+}
+
+// Border-box app wide
+html {
+  box-sizing: border-box;
+  height: 100%;
+}
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+.app {
+  height: 100%;
+}
+
+#root {
+  height: 100%;
+  position: relative;
+}
+
+.app-content {
+  height: 100%;
+}
