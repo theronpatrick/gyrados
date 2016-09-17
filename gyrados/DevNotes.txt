@@ -1,1 +1,3 @@
-- Comma missing in datastore.js
+- Comma missing in datastore.js, also first object has "property_values" not "properties"
+- Not sure why properties are an array instead of an object
+-

@@ -14,7 +14,7 @@ window.datastore = {
   products: [
     {
       id: 0,
-      property_values: [
+      properties: [
         {
           property_id: 0,
           value: 'Headphones'

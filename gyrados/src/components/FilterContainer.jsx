@@ -1,15 +1,14 @@
 import React, { Component } from 'react';
-// Might want to wrap this in a component
-import DataStore from '../models/datastore';
 class FilterContainer extends Component {
 
   componentWillMount() {
-    // TODO: Get products in separate product list
+
     this.setState({
-      properties: window.datastore.getProperties(),
-      operators: window.datastore.getOperators(),
+      properties: this.props.properties,
+      operators: this.props.operators,
       filters: [{}]
     })
+
   }
 
   // If this got bigger could be moved into own component
@@ -34,7 +33,7 @@ class FilterContainer extends Component {
   _addFilter = () => {
     console.log("in add filter " , this.state.filters)
 
-    var filters = this.state.filters;
+    let filters = this.state.filters;
     filters.push({});
 
     this.props.setFilters(filters)
@@ -48,16 +47,14 @@ class FilterContainer extends Component {
     e.preventDefault();
   }
 
-  _formChanged() {
-    var filters = this.state.filters;
+  _formChanged = () => {
+    let filters = this.state.filters;
     this.props.setFilters(filters);
   }
 
   render() {
 
-    var inputs = [];
-
-    console.log("in render filters " , this.state.filters)
+    let inputs = [];
 
     this.state.filters.forEach((value, index) => {
       inputs.push(this._getInputTemplate(index))
