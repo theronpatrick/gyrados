@@ -15,23 +15,49 @@ class FilterContainer extends Component {
   _getInputTemplate(index) {
     return (
     <div key={index}>
-      <select>
+      <select onChange={this._inputChange} data-input-type="propertyNameID" data-index={index}>
         {this.state.properties.map((value, key) => {
-          return <option value={value.id} key={value.id}>{value.name}</option>;
+          return <option
+          value={value.id}
+          key={value.id}
+          >{value.name}</option>;
         })}
       </select>
-      <select>
+      <select onChange={this._inputChange} data-input-type="operatorID" data-index={index}>
         {this.state.operators.map((value, key) => {
-          return <option value={value.id} key={value.id}>{value.text}</option>;
+          return <option
+            value={value.id}
+            key={value.id}
+            >{value.text}</option>;
         })}
       </select>
-      <input></input>
+      <input
+        key={index}
+        data-index={index}
+        data-input-type="propertyValue"
+        onChange={this._inputChange}
+      ></input>
     </div>
     )
   }
 
+  _inputChange = (e) => {
+
+    let index = e.target.getAttribute("data-index");
+    let value = e.target.value;
+    let type = e.target.getAttribute("data-input-type");
+
+    console.log("type " , type)
+
+    let filters = this.state.filters;
+    filters[index][type] = value;
+
+    this.setState({
+      filters: filters
+    })
+  }
+
   _addFilter = () => {
-    console.log("in add filter " , this.state.filters)
 
     let filters = this.state.filters;
     filters.push({});

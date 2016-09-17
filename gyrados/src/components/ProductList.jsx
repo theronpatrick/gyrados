@@ -13,7 +13,6 @@ class ProductList extends Component {
   }
 
   updateFilters(filters) {
-    console.log("in update")
     this.setState({
       filters: filters
     })
