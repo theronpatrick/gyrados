@@ -1,14 +1,24 @@
 import React, { Component } from 'react';
 class FilterContainer extends Component {
 
+  /*** This container will set the list of filters to be applied to the product list
+  A filter will be an object with the following attributes:
+  {
+    propertyNameID
+    operatorID
+    propertyValue
+  }
+  ***/
   componentWillMount() {
 
     this.setState({
-      properties: this.props.properties,
-      operators: this.props.operators,
-      filters: [{}]
+      properties: this.props.properties || [],
+      operators: this.props.operators || [],
+      filters: []
+    }, () => {
+      // Start with one filter
+      this._addFilter();
     })
-
   }
 
   // If this got bigger could be moved into own component
@@ -47,9 +57,13 @@ class FilterContainer extends Component {
     let value = e.target.value;
     let type = e.target.getAttribute("data-input-type");
 
-    console.log("type " , type)
-
     let filters = this.state.filters;
+
+    // Convert property name ID to an int to match product data
+    if (type === "propertyNameID") {
+      value = parseInt(value);
+    }
+
     filters[index][type] = value;
 
     this.setState({
@@ -60,7 +74,12 @@ class FilterContainer extends Component {
   _addFilter = () => {
 
     let filters = this.state.filters;
-    filters.push({});
+
+    filters.push({
+      propertyNameID: this.state.properties[0].id,
+      operatorID: this.state.operators[0].id,
+      propertyValue: ""
+    });
 
     this.props.setFilters(filters)
 
