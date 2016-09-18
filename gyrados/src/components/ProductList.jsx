@@ -111,10 +111,8 @@ class ProductList extends Component {
         break;
       case "in":
         let pieces = filterValue.split(" ");
-        console.log("pieces are " , pieces)
         for (let i = 0; i < pieces.length; i++) {
           if (pieces[i] == productValue) {
-            console.log("matched")
             return true;
           }
         }

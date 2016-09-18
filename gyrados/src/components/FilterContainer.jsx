@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import FilterInput from './FilterInput'
 class FilterContainer extends Component {
 
   /*** This container will set the list of filters to be applied to the product list
@@ -23,6 +24,7 @@ class FilterContainer extends Component {
 
   // If this got bigger could be moved into own component
   _getInputTemplate(index) {
+
     return (
     <div key={index}>
       <select onChange={this._inputChange} data-input-type="propertyNameID" data-index={index}>
@@ -41,6 +43,8 @@ class FilterContainer extends Component {
             >{value.text}</option>;
         })}
       </select>
+
+
       <input
         key={index}
         data-index={index}
@@ -69,6 +73,9 @@ class FilterContainer extends Component {
     this.setState({
       filters: filters
     })
+
+    // Send data up
+    this.props.setFilters(filters);
   }
 
   _addFilter = () => {
@@ -92,17 +99,17 @@ class FilterContainer extends Component {
     e.preventDefault();
   }
 
-  _formChanged = () => {
-    let filters = this.state.filters;
-    this.props.setFilters(filters);
-  }
-
   render() {
 
     let inputs = [];
 
     this.state.filters.forEach((value, index) => {
-      inputs.push(this._getInputTemplate(index))
+      inputs.push(<FilterInput
+        index={index}
+        properties={this.state.properties}
+        operators={this.state.operators}
+        inputChange={this._inputChange}
+         />)
     })
 
 
