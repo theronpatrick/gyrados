@@ -40,13 +40,17 @@ class ProductList extends Component {
       // Only return element if property name is valid (i.e. successfully returns from _getPropertyNameByID)
       if (propertyName) {
         propertyList.push(
-          <div>{propertyName}: {product.properties[i].value}</div>
+          <div><b>{this._capFirst(propertyName)}</b>: {product.properties[i].value}</div>
         )
       }
 
 
     }
     return propertyList;
+  }
+
+  _capFirst(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
   }
 
   _productMatchesFilters(value) {
@@ -57,7 +61,6 @@ class ProductList extends Component {
       let filter = filters[i];
 
       let productValue = this._getProductPropertyValue(value, filter.propertyNameID);
-      console.log("property value is " , productValue)
 
       let matches = this._checkFilterMatch(productValue, filter.propertyValue, filter.operatorID)
 
@@ -133,19 +136,20 @@ class ProductList extends Component {
 
   render() {
 
-    console.log("Product filters " , this.state.filters)
+    let count = 0;
 
     return (
-      <ul>
+      <ul className="product-list">
         {this.state.products.map((value, key) => {
           // For each product, run through filter check to see if we should render or not
           if (this._productMatchesFilters(value)) {
+            count++;
             return <li key={value.id}>
               {this._getProductProperties(value)}
             </li>
           }
         })}
-        <li>Filters applied: {this.state.filters.length}</li>
+        <p>Results: {count}</p>
       </ul>
     );
   }

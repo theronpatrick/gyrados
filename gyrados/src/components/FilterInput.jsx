@@ -113,7 +113,7 @@ class FilterInput extends Component {
   let operators = this._getOperators();
 
   return (
-    <div key={index}>
+    <div className="filter-row" key={index}>
       <select
         onChange={this._propertyTypeChange}
         data-input-type="propertyNameID"

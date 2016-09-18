@@ -22,39 +22,6 @@ class FilterContainer extends Component {
     })
   }
 
-  // If this got bigger could be moved into own component
-  _getInputTemplate(index) {
-
-    return (
-    <div key={index}>
-      <select onChange={this._inputChange} data-input-type="propertyNameID" data-index={index}>
-        {this.state.properties.map((value, key) => {
-          return <option
-          value={value.id}
-          key={value.id}
-          >{value.name}</option>;
-        })}
-      </select>
-      <select onChange={this._inputChange} data-input-type="operatorID" data-index={index}>
-        {this.state.operators.map((value, key) => {
-          return <option
-            value={value.id}
-            key={value.id}
-            >{value.text}</option>;
-        })}
-      </select>
-
-
-      <input
-        key={index}
-        data-index={index}
-        data-input-type="propertyValue"
-        onChange={this._inputChange}
-      ></input>
-    </div>
-    )
-  }
-
   _inputChange = (e) => {
 
     let index = e.target.getAttribute("data-index");
@@ -113,12 +80,10 @@ class FilterContainer extends Component {
     })
 
 
-    this._getInputTemplate();
-
     return (
       <div className="filter-container">
         <form onSubmit={this._formSubmit} onChange={this._formChanged}>
-          <button onClick={this._addFilter}>Add Filter</button>
+          <button className="add-button" onClick={this._addFilter}>Add Filter</button>
           {inputs}
         </form>
       </div>
