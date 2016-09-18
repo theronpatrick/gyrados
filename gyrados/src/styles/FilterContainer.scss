@@ -1,0 +1,47 @@
+.filter-container {
+  text-align: center;
+
+  button {
+    cursor: pointer;
+    background-color: $blue;
+    color: $white;
+
+    border: none;
+    border-radius: 5px;
+  }
+
+  .add-button {
+
+    width: 100%;
+    max-width: 500px;
+
+    height: 40px;
+
+    font-size: 28px;
+
+    margin-bottom: 10px;
+  }
+
+  .filter-row {
+    height: 40px;
+
+    border: 3px solid $white;
+    border-radius: 5px;
+
+    max-width: 500px;
+
+    margin: 10px auto;
+    padding: 5px;
+
+    font-size: 14px;
+
+    input, select {
+      width: 25%;
+      margin-right: 5%;
+
+      &:last-child {
+        margin-right: 0;
+      }
+    }
+  }
+}

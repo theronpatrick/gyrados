@@ -1,0 +1,22 @@
+.product-list {
+  list-style-type: none;
+  text-align: left;
+
+  li {
+
+    width: 300px;
+    height: 150px;
+    display: inline-block;
+    vertical-align: top;
+
+    text-align: left;
+
+    padding: 10px;
+    border: 3px solid $white;
+
+    margin: 5px;
+
+    border-radius: 5px;;
+  }
+
+}
