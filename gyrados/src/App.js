@@ -29,6 +29,7 @@ class App extends Component {
   render() {
     return (
       <div className="app">
+      <h1>Product Filtering Exercise</h1>
         <FilterContainer setFilters={this.setFilters} properties={this.state.properties} operators={this.state.operators} />
         <ProductList filters={this.state.filters} ref="products" properties={this.state.properties} operators={this.state.operators} />
       </div>

@@ -69,8 +69,6 @@ class FilterInput extends Component {
     let type = this.state.selectedProperty ? this.state.selectedProperty.type : "string"
     let validOperators = this._getOperatorsForType(type);
 
-    console.log("selectd " , this.state.selectedProperty)
-
     operators = operators.filter((value, key) => {
       if (validOperators[value.id]) {
         return true
@@ -112,12 +110,15 @@ class FilterInput extends Component {
 
   let operators = this._getOperators();
 
+  console.log("in my input " , this.props.value)
+
   return (
-    <div key={index}>
+    <div key={index} className="filter-row">
       <select
         onChange={this._propertyTypeChange}
         data-input-type="propertyNameID"
         data-index={index}
+        value={this.state.propertyNameID}
         >{this.props.properties.map((value, key) => {
           return <option
           value={value.id}
@@ -140,6 +141,7 @@ class FilterInput extends Component {
 
       {inputElement}
 
+      <button onClick={this.props.removeFilter} data-index={index}>X</button>
     </div>
     )
   }

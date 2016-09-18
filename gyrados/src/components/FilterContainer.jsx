@@ -15,44 +15,13 @@ class FilterContainer extends Component {
     this.setState({
       properties: this.props.properties || [],
       operators: this.props.operators || [],
-      filters: []
+      filters: [],
+      filterInputs: [],
+      nextFilterIndex: 0
     }, () => {
       // Start with one filter
       this._addFilter();
     })
-  }
-
-  // If this got bigger could be moved into own component
-  _getInputTemplate(index) {
-
-    return (
-    <div key={index}>
-      <select onChange={this._inputChange} data-input-type="propertyNameID" data-index={index}>
-        {this.state.properties.map((value, key) => {
-          return <option
-          value={value.id}
-          key={value.id}
-          >{value.name}</option>;
-        })}
-      </select>
-      <select onChange={this._inputChange} data-input-type="operatorID" data-index={index}>
-        {this.state.operators.map((value, key) => {
-          return <option
-            value={value.id}
-            key={value.id}
-            >{value.text}</option>;
-        })}
-      </select>
-
-
-      <input
-        key={index}
-        data-index={index}
-        data-input-type="propertyValue"
-        onChange={this._inputChange}
-      ></input>
-    </div>
-    )
   }
 
   _inputChange = (e) => {
@@ -90,8 +59,55 @@ class FilterContainer extends Component {
 
     this.props.setFilters(filters)
 
+    // Build new filter input element and add it to list
+    let filterInputs = this.state.filterInputs;
+    let index = this.state.nextFilterIndex;
+
+    let filterInput = <FilterInput
+      index={index}
+      properties={this.state.properties}
+      operators={this.state.operators}
+      inputChange={this._inputChange}
+      removeFilter={this._removeFilter}
+    />
+
+    filterInputs.push(filterInput)
+
+    console.log("inputs is " , filterInputs);
+
     this.setState({
-      filters: filters
+      filters: filters,
+      filterInputs: filterInputs,
+      nextFilterIndex: index + 1
+    })
+  }
+
+  _removeFilter = (e) => {
+    let index = e.target.getAttribute("data-index");
+
+    let filters = this.state.filters;
+    filters.splice(index, 1);
+
+    // Send data up
+    this.props.setFilters(filters);
+
+    // Remove filter input by finding its ID
+    let filterInputs = this.state.filterInputs;
+
+    for (let i = 0; i < filterInputs.length; i++) {
+      let filter = filterInputs[i];
+      console.log("ids..." , filter.props.index)
+      if (filter.props.index === parseInt(index)) {
+        console.log("in match")
+        filterInputs.splice(i, 1);
+        return;
+      }
+    }
+
+
+    this.setState({
+      filters: filters,
+      filterInputs: filterInputs
     })
   }
 
@@ -101,25 +117,11 @@ class FilterContainer extends Component {
 
   render() {
 
-    let inputs = [];
-
-    this.state.filters.forEach((value, index) => {
-      inputs.push(<FilterInput
-        index={index}
-        properties={this.state.properties}
-        operators={this.state.operators}
-        inputChange={this._inputChange}
-         />)
-    })
-
-
-    this._getInputTemplate();
-
     return (
       <div className="filter-container">
         <form onSubmit={this._formSubmit} onChange={this._formChanged}>
-          <button onClick={this._addFilter}>Add Filter</button>
-          {inputs}
+          <button className="add-button" onClick={this._addFilter}>Add Filter</button>
+          {this.state.filterInputs}
         </form>
       </div>
     );
