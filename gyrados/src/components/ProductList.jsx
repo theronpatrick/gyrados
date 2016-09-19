@@ -4,7 +4,6 @@ import DataStore from '../models/datastore';
 class ProductList extends Component {
 
   componentWillMount() {
-    // TODO: Get products in separate product list
     this.setState({
       products: window.datastore.getProducts(),
       properties: this.props.properties,
@@ -89,9 +88,6 @@ class ProductList extends Component {
     if (filterValue === "") {
       return true;
     }
-
-    // TODO: Type conversions/to lower case for values
-
 
     // Otherwise check the right operation
     switch (operator) {

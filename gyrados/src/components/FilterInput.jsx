@@ -69,8 +69,6 @@ class FilterInput extends Component {
     let type = this.state.selectedProperty ? this.state.selectedProperty.type : "string"
     let validOperators = this._getOperatorsForType(type);
 
-    console.log("selectd " , this.state.selectedProperty)
-
     operators = operators.filter((value, key) => {
       if (validOperators[value.id]) {
         return true
