@@ -1,3 +1,0 @@
-- Comma missing in datastore.js, also first object has "property_values" not "properties"
-- Not sure why properties are an array instead of an object
-- "Category" is enumerated but has filter type "has any", so correct input is really a multi-select for this, but implemented or using a library for a custom multi-select dropdown seemed out of scope for this exercise.  Radio buttons could work too for this small data set, but in more realistic cases there'd be 10+ categories, so it really should be in a dropdown.

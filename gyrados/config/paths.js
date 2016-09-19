@@ -29,5 +29,6 @@ module.exports = {
   testsSetup: resolveApp('src/setupTests.js'),
   appNodeModules: resolveApp('node_modules'),
   ownNodeModules: resolveApp('node_modules'),
+  appFavicon: resolveApp('favicon.ico'),
   nodePaths: nodePaths
 };
