@@ -33,4 +33,4 @@ I spent several hours this weekend putting together this app.  The most time con
 
 One known limitation is that "Category" is enumerated but has filter type "has any", so correct input is really a multi-select for this, but implementing or using a library for a custom multi-select dropdown seemed out of scope for this exercise.  Check boxes could work too for this small data set, but in more realistic cases there'd be 10+ categories, so it really should be in a dropdown.
 
-There were also a couples errors I found in `datastore.js`. The first product lists `property_values` instead of `properties`.  Also, it is missing a comma after its first product's `propert_type`.  
+There were also a couples errors I found in `datastore.js`. The first product lists `property_values` instead of `properties`.  Also, it is missing a comma after its first product's `property_type`.  
